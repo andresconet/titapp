@@ -1,35 +1,45 @@
-import { useQuery, gql } from '@apollo/client';
+import Header from './components/Header';
+import { createGlobalStyle } from 'styled-components';
+import AppContextProvider from './context/AppContextProvider'
+import Content from './components/Content';
 
-const COMMETS_BY_USER = gql`
-    {
-        commentsByUser(userId: "ayCTeEVLIWD1EXfwJ5cZ", limit: 10, page: 1) {
-            data {
-                id
-                message
-                publishDate
-                owner {
-                    id
-                    firstName
-                    lastName
-                }
-            }
-            total
-            page
-            limit
-            offset
-        }
-    }
+
+const GlobalStyles = createGlobalStyle`
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  font-family: 'Roboto','Montserrat','Open Sans', --apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  padding: 0;
+  margin: 0;
+  font-size: 1.4rem;
+  color:#3a3a3a;
+  line-height:1.3;
+}
+a {
+  text-decoration: none;
+}
+
+button {
+  font-family: 'Montserrat','Open Sans', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
 `;
 
-export const App = (userID="ayCTeEVLIWD1EXfwJ5cZ") => {
-    const { loading, error, data } = useQuery(COMMETS_BY_USER);
-    if (loading) return <h2>Cargando...</h2>;
-    if (error) return <p>Error :(</p>;
-    // const { allOrders } = data;
+const App = () => {
 
-    return (
-        <>
-            {console.log(data)}
-        </>
-    );
-};
+  return (
+      <>
+        <GlobalStyles />
+        <AppContextProvider>
+          <Header />
+          <Content />
+        </AppContextProvider>
+      </>
+  );
+}
+
+export default App;
