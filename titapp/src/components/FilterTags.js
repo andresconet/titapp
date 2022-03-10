@@ -4,7 +4,7 @@ import AppContext from '../context/AppContext';
  
  const BtnTag = styled.button`
  background: #434cac;
- color: #fff;
+ color: #ffffff;
  cursor: pointer;
  font-size: 1.4rem;
  padding: 7px 20px 11px;
